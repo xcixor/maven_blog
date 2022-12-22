@@ -1,4 +1,6 @@
 import express from 'express';
+import path from 'path';
+import {fileURLToPath} from 'url';
 import chalk from 'chalk';
 import debug from 'debug';
 import morgan from 'morgan';
@@ -7,12 +9,14 @@ import usersRoutes from './routes/users.js';
 
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const PORT = 5000;
 
 app.use(morgan('tiny'));
 
+app.use(express.static(path.join(__dirname, '/public/')));
 app.use(bodyParser.json());
-
 app.use('/users', usersRoutes);
 
 app.get('/', (req, res)=> {
