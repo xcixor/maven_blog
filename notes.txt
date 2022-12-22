@@ -1,0 +1,7 @@
+intermediate
+- setup (debugging, linting)
+- testing
+- securing routes
+- connecting to mongo
+- good practices
+- authentication
