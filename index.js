@@ -11,7 +11,7 @@ import usersRoutes from './routes/users.js';
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PORT = 5000;
+const PORT = process.env.PORT || 4000;
 
 app.use(morgan('tiny'));
 
@@ -19,8 +19,11 @@ app.use(express.static(path.join(__dirname, '/public/')));
 app.use(bodyParser.json());
 app.use('/users', usersRoutes);
 
+app.set('views', './src/views');
+app.set('view engine', 'ejs')
+
 app.get('/', (req, res)=> {
-    res.send('Hello from xcixor')
+    res.render('index', {'title': 'Welcome to Maven Fix'});
 });
 
 app.listen(PORT, ()=> debug(`Server running on port: http://localhost:${chalk.green(PORT)}` ));
