@@ -1,31 +1,28 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import chalk from 'chalk';
-import debug from 'debug';
-import morgan from 'morgan';
-import dotenv from 'dotenv';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import bodyParser from 'body-parser';
-// eslint-disable-next-line import/extensions
-import usersRoutes from './routes/users.js';
+/* eslint-disable import/no-extraneous-dependencies */
+const mongoose = require('mongoose');
+const path = require('path');
+const url = require('url');
+const chalk = require('chalk');
+const debug = require('debug');
+const morgan = require('morgan');
+const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+const express = require('express');
+const usersRoutes = require('./routes/users');
 
 dotenv.config();
 
 const app = express();
 // eslint-disable-next-line no-underscore-dangle
-const __filename = fileURLToPath(import.meta.url);
+// const __filename = url.fileURLToPath(import.meta.url);
 // eslint-disable-next-line no-underscore-dangle
-const __dirname = path.dirname(__filename);
+// const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 4000;
 
 const PASSWORD = process.env.MONGO_PASSWORD;
 const USER = process.env.MONGO_USER;
 const { CLUSTER } = process.env;
-const { DBNAME } = process.env;
 
-// const dbUri = `mongodb+srv://${USER}:<${PASSWORD}>@${CLUSTER}.kpnelhi.mongodb.net/${DBNAME}?retryWrites=true&w=majority`;
 const uri = `mongodb+srv://${USER}:${PASSWORD}@${CLUSTER}.xwt3f2h.mongodb.net/?retryWrites=true&w=majority`;
 const connectionParams = {
   useNewUrlParser: true,
@@ -38,13 +35,6 @@ mongoose.connect(uri, connectionParams)
   .catch((err) => {
     console.log(chalk.red(`Error connecting to the database. n${err}`));
   });
-
-// const db = mongoose.connection;
-// db.on('error', debug(chalk.red('connection error: ')));
-// db.once('open', () => {
-//   debug(chalk.greenBright('Connected successfully'));
-// });
-// debug(db, '**');
 
 app.use(morgan('tiny'));
 

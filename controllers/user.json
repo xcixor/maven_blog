@@ -1,0 +1,10 @@
+{
+    "firstName": "Jane",
+    "lastName": "Jameson",
+    "email": "jj@gmail.com",
+    "isStaff": true,
+    "isSuperUser": false,
+    "password": "pass1235",
+    "avatar": "",
+    "country": "Kenya"
+}

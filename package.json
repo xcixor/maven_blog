@@ -1,11 +1,10 @@
 {
   "name": "maven_blog",
   "version": "1.0.0",
-  "type": "module",
   "description": "An Api for my blog",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "mocha __tests__/**/*test.js",
     "start": "DEBUG=app nodemon index.js",
     "debug": "DEBUG=* nodemon index.js",
     "lint": "eslint"
@@ -26,19 +25,27 @@
   },
   "homepage": "https://github.com/xcixor/maven_blog#readme",
   "dependencies": {
-    "chalk": "^5.2.0",
+    "chai": "^4.3.7",
+    "chalk": "^4.1.2",
     "debug": "^4.3.4",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "express-validator": "^6.14.2",
     "mongoose": "^6.8.1",
     "morgan": "^1.10.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
     "eslint": "^8.30.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "nodemon": "^2.0.20"
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.20",
+    "should": "^13.2.3",
+    "sinon": "^15.0.1"
   },
   "nodemonConfig": {
     "restartable": "rs",
@@ -46,5 +53,10 @@
     "env": {
       "PORT": 4000
     }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
