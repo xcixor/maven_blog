@@ -1,19 +1,18 @@
-import express from 'express';
-import {
-  createUser, getUsers, getUser, deleteUser, updateUser,
-// eslint-disable-next-line import/extensions
-} from '../controllers/users.js';
+/* eslint-disable import/extensions */
+const express = require('express');
+const userController = require('../controllers/users');
+const userValidate = require('../middleware/userValidation');
 
 const router = express.Router();
 
-router.get('/', getUsers);
+router.get('/', userController.getUsers);
 
-router.post('/', createUser);
+router.post('/', userValidate('createUser'), userController.createUser);
 
-router.get('/:id', getUser);
+router.get('/:id', userController.getUser);
 
-router.delete('/:id', deleteUser);
+router.delete('/:id', userController.deleteUser);
 
-router.patch('/:id', updateUser);
+router.patch('/:id', userController.updateUser);
 
-export default router;
+module.exports = router;
