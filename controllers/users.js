@@ -1,4 +1,5 @@
 const expressValidator = require('express-validator');
+const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
 const userService = require('../services/userService');
 
@@ -7,14 +8,32 @@ let users = [];
 const createUser = async (req, res) => {
   const errors = expressValidator.validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(422).send({ errors: errors.array() });
+    res.render(
+      'auth/register.ejs',
+      { title: 'Registration', errors: errors.array() }
+    );
+    return;
   }
-  const { code, response } = await userService.addUser(req.body);
-  return res.status(code).json(response);
-
-  // res.status(201).send(req.body);
-  // encrypt password
-  // const { password } = req.body;
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const userDetails = { ...req.body, password: hashedPassword };
+    const { code, response } = await userService.addUser(userDetails);
+    if (code === 409) {
+      const errorMessage = [{ msg: `The account ${response.email} already exists!` }];
+      res.render(
+        'auth/register.ejs',
+        { title: 'Registration', errors: errorMessage }
+      );
+      return;
+    }
+    res.redirect('/login');
+    return;
+  } catch (error) {
+    res.render(
+      'auth/register.ejs',
+      { title: 'Registration', errors: error }
+    );
+  }
 };
 
 const getUsers = (req, res) => {
