@@ -25,7 +25,7 @@ describe('Create user', () => {
         email: 'j@k.com',
         isSuperUser: false,
         isStaff: true,
-        password: 'pass12358',
+        password: 'paSS12358#',
         avatar: '',
         country: 'KE'
       };

@@ -47,7 +47,23 @@ app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Welcome to Maven Fix' });
+  res.render('index', { title: 'Blog' });
+});
+
+app.get('/login', (req, res) => {
+  res.render('auth/login.ejs', { title: 'Login' });
+});
+
+app.post('/login', (req, res) => {
+  res.render('auth/login.ejs', { title: 'Login' });
+});
+
+app.get('/register', (req, res) => {
+  res.render('auth/register.ejs', { title: 'Registration' });
+});
+
+app.post('/register', (req, res) => {
+  res.render('auth/register.ejs', { title: 'Registration' });
 });
 
 app.listen(PORT, () => debug(`Server running on port: http://localhost:${chalk.green(PORT)}`));

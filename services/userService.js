@@ -3,10 +3,12 @@ const User = require('../models/userModel');
 const { StatusCodes } = require('../utils/httpStatusCodes');
 
 const addUser = async (details) => {
-  const { _id } = await User.create(details);
-
-  const response = { id: _id };
-
+  const existingUser = await User.findOne({ email: details.email });
+  if (existingUser) {
+    return { code: StatusCodes.CONFLICT, response: existingUser };
+  }
+  const { _id, email } = await User.create(details);
+  const response = { id: _id, email };
   return { code: StatusCodes.CREATED, response };
 };
 

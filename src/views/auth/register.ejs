@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%=title%></title>
+	</head>
+	<body>
+		<h2>Register</h2>
+		<form action="/users/register/" method="post">
+			<div class="row">
+				<%if (locals.errors) { %>
+				<% for(let [index,data] of errors.entries() || []){ %>Error :
+				<%=data.msg%> <%} %>
+				<% } %>
+			</div>
+			<div class="row">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" required />
+			</div>
+			<div class="row">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" required />
+			</div>
+			<div class="row">
+				<button type="submit">Register</button>
+			</div>
+			<div class="row">
+				<p
+					>Already registered?
+					<a href="/login">Login</a>
+				</p>
+			</div>
+		</form>
+	</body>
+</html>
