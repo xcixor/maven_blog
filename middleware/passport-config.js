@@ -4,12 +4,10 @@ const bcrypt = require('bcrypt');
 
 function initialize(passport, getUserByEmail, getUserById) {
   const authenticateUser = async (email, password, done) => {
-    // console.log(email, password, '*****************');
     const user = await getUserByEmail(email);
     if (user == null) {
       return done(null, false, { message: 'No user with that email found.' });
     }
-    console.log(user, '*****************');
 
     try {
       if (await bcrypt.compare(password, user.password)) {

@@ -9,7 +9,7 @@ const createUser = async (req, res) => {
   const errors = expressValidator.validationResult(req);
   if (!errors.isEmpty()) {
     res.render(
-      'auth/register.ejs',
+      'users/register.ejs',
       { title: 'Registration', errors: errors.array() }
     );
     return;
@@ -21,16 +21,16 @@ const createUser = async (req, res) => {
     if (code === 409) {
       const errorMessage = [{ msg: `The account ${response.email} already exists!` }];
       res.render(
-        'auth/register.ejs',
+        'users/register.ejs',
         { title: 'Registration', errors: errorMessage }
       );
       return;
     }
-    res.redirect('/login');
+    res.redirect('/auth/login/');
     return;
   } catch (error) {
     res.render(
-      'auth/register.ejs',
+      'users/register.ejs',
       { title: 'Registration', errors: error }
     );
   }

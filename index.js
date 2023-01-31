@@ -13,9 +13,10 @@ const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const usersRoutes = require('./routes/users');
+const authRoutes = require('./routes/auth');
 // const getUserByEmail = require('./utils/userDBUtils');
 const User = require('./models/userModel');
-const { checkAuthenticated, checkNotAuthenticated } = require('./middleware/auth');
+const { checkAuthenticated } = require('./middleware/auth');
 
 dotenv.config();
 
@@ -66,33 +67,13 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/users', usersRoutes);
+app.use('/auth', authRoutes);
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 app.get('/', checkAuthenticated, (req, res) => {
   res.render('index', { title: 'Blog', user: req.user.email });
-});
-
-app.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('auth/login.ejs', { title: 'Login' });
-});
-
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
-}));
-
-app.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('auth/register.ejs', { title: 'Registration' });
-});
-
-app.delete('/logout', (req, res, next) => {
-  req.logout((err) => {
-    if (err) { return next(err); }
-    return res.redirect('/login');
-  });
 });
 
 app.listen(PORT, () => debug(`Server running on port: http://localhost:${chalk.green(PORT)}`));
