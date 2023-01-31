@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const mongoose = require('mongoose');
 const path = require('path');
-// const url = require('url');
 const chalk = require('chalk');
 const debug = require('debug');
 const morgan = require('morgan');
@@ -14,17 +13,11 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const usersRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
-// const getUserByEmail = require('./utils/userDBUtils');
-const User = require('./models/userModel');
 const { checkAuthenticated } = require('./middleware/auth');
 
 dotenv.config();
 
 const app = express();
-// eslint-disable-next-line no-underscore-dangle
-// const __filename = url.fileURLToPath(import.meta.url);
-// eslint-disable-next-line no-underscore-dangle
-// const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 4000;
 
 const PASSWORD = process.env.MONGO_PASSWORD;
@@ -33,11 +26,7 @@ const { CLUSTER } = process.env;
 
 const initializePassport = require('./middleware/passport-config');
 
-initializePassport(
-  passport,
-  async (email) => User.findOne({ email }),
-  async (_id) => User.findOne({ _id })
-);
+initializePassport(passport);
 
 const uri = `mongodb+srv://${USER}:${PASSWORD}@${CLUSTER}.xwt3f2h.mongodb.net/?retryWrites=true&w=majority`;
 const connectionParams = {
