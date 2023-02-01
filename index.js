@@ -63,6 +63,7 @@ app.use('/blog', blogRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
 
+app.use(express.static('public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
