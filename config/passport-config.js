@@ -9,23 +9,19 @@ const opts = {
   secretOrKey: process.env.ACCESS_TOKEN_SECRET,
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken('jwt')
 };
-const UserModel = require('../models/userModel');
 
-// function initialize(passport) {
-passport.use(new JwtStrategy(opts, ((jwtPayload, done) => {
-  UserModel.findOne({ _id: jwtPayload.user.id }, (err, user) => {
-    if (err) {
-      return done(err, false);
-    }
+passport.use(new JwtStrategy(opts, (async (jwtPayload, done) => {
+  try {
+    const user = (await getUserById(jwtPayload.user.id)).response;
     if (user) {
       return done(null, user);
     }
     return done(null, false);
-  });
+  } catch (error) {
+    return done(error, false);
+  }
 })));
-// }
 
-// module.exports = initialize;
 const authenticateUser = async (email, password, done) => {
   const user = (await getUserByEmail(email)).response;
   if (user == null) {
