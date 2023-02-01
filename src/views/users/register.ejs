@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<h2>Register</h2>
-		<form action="/users/register/" method="post">
+		<form action="/api/users/register/" method="post">
 			<div class="row">
 				<%if (locals.errors) { %>
 				<% for(let [index,data] of errors.entries() || []){ %>Error :
@@ -29,7 +29,7 @@
 			<div class="row">
 				<p
 					>Already registered?
-					<a href="/auth/login/">Login</a>
+					<a href="/blog/login/">Login</a>
 				</p>
 			</div>
 		</form>

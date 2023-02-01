@@ -26,7 +26,7 @@ const createUser = async (req, res) => {
       );
       return;
     }
-    res.redirect('/auth/login/');
+    res.redirect('/blog/login/');
     return;
   } catch (error) {
     res.render(

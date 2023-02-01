@@ -1,6 +1,6 @@
 const expressValidator = require('express-validator');
 
-const validate = (method) => {
+const validateUser = (method) => {
   switch (method) {
     case 'createUser': {
       return [
@@ -16,4 +16,4 @@ const validate = (method) => {
   }
 };
 
-module.exports = validate;
+module.exports = { validateUser };

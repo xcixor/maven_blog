@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 const chalk = require('chalk');
@@ -13,6 +14,7 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const usersRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
+const blogRoutes = require('./routes/blog');
 const { checkAuthenticated } = require('./middleware/auth');
 
 dotenv.config();
@@ -24,9 +26,9 @@ const PASSWORD = process.env.MONGO_PASSWORD;
 const USER = process.env.MONGO_USER;
 const { CLUSTER } = process.env;
 
-const initializePassport = require('./middleware/passport-config');
+require('./config/passport-config');
 
-initializePassport(passport);
+// initializePassport(passport);
 
 const uri = `mongodb+srv://${USER}:${PASSWORD}@${CLUSTER}.xwt3f2h.mongodb.net/?retryWrites=true&w=majority`;
 const connectionParams = {
@@ -55,8 +57,11 @@ app.use(passport.session());
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/users', usersRoutes);
-app.use('/auth', authRoutes);
+app.use(cors());
+app.use(passport.initialize());
+app.use('/blog', blogRoutes);
+app.use('/api/users', usersRoutes);
+app.use('/api/auth', authRoutes);
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
