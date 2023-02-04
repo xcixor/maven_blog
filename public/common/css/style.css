@@ -5,3 +5,6 @@ html, body {
 body {
     background-color: whitesmoke;
 }
+.undecorated-link {
+    text-decoration: none;
+}

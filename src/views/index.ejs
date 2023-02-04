@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<%- include('./partials/styles') %>
-		<title><%=title%></title>
-	</head>
-	<body>
-        <%- include('./partials/nav') %>
+
+<head>
+	<%- include('./partials/styles') %>
+		<link rel="stylesheet" href="/common/css/fab.css" />
+		<title>
+			<%=title%>
+		</title>
+</head>
+
+<body>
+	<%- include('./partials/nav') %>
 		<section class="content">
 			<div class="container">
-				<h2>Welcome <%=user %> </h2>
-				<form action="/blog/logout?_method=DELETE" method="post">
-					<button type="submit" class="btn btn-primary">Logout</button>
-				</form>
+				<h2>Welcome <%=user %>
+				</h2>
+				<div class="row">
+					<div class="col-sm-12">
+						<h3>List of all blogs</h3>
+					</div>
+				</div>
 			</div>
+			<a href="/post/add/" class="float d-flex align-items-center justify-content-center undecorated-link">
+				<i class="fa-solid fa-plus fa-2x"></i>
+			</a>
 		</section>
 		<%- include('./partials/footer') %>
-	</body>
+</body>
+
 </html>
