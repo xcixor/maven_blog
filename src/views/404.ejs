@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/styles') %>
+        <link rel="stylesheet" href="/common/css/fab.css" />
+        <title>
+            <%=title%>
+        </title>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+        <section class="content mt-4">
+            <div class="container mt-4">
+                <div class="row pt-4">
+                    <div class="col-sm-12 col-md-4 offset-lg-4 col-lg-6 offset-lg-3">
+                        <div class="card d-flex">
+                            <div class="card-body">
+                                <h5 class="card-title">Page not Found</h5>
+                                <p class="card-text">Sorry, that resources was not found.</p>
+                                <a href="/" class="btn btn-primary">Go home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <%- include('./partials/footer') %>
+</body>
+
+</html>

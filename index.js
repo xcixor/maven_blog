@@ -71,4 +71,8 @@ app.get('/', checkAuthenticated, (req, res) => {
   res.render('index', { title: 'Blog', user: req.user.email });
 });
 
+app.use((req, res) => {
+  res.status(404).render('404', { title: '404' });
+});
+
 app.listen(PORT, () => debug(`Server running on port: http://localhost:${chalk.green(PORT)}`));
