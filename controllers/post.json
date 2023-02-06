@@ -1,0 +1,13 @@
+{
+    "title": "String",
+    "body": "TextField (ckeditor)",
+    "epigraph": "TextField (ckeditor)",
+    "publish_date": "Date",
+    "updated":"Date",
+    "slug": "slug",
+    "author": "User Id",
+    "thumbnail": "image",
+    "category": "choice",
+    "tags": "List",
+    "featured": "boolean"
+}
