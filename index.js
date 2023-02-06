@@ -59,17 +59,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
-app.use('/blog', blogRoutes);
+app.use('/', blogRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
 
 app.use(express.static('public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
-
-app.get('/', checkAuthenticated, (req, res) => {
-  res.render('index', { title: 'Blog', user: req.user.email });
-});
 
 app.use((req, res) => {
   res.status(404).render('404', { title: '404' });
