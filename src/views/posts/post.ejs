@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/styles') %>
+		<title> <%=title%> </title>
+	</head>
+
+	<body>
+		<%- include('../partials/nav') %>
+		<section class="content">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-sm-12 col-md-4 offset-lg-4 col-lg-6 offset-lg-3">
+						<h3>Add Post</h3>
+
+					</div>
+				</div>
+			</div>
+			<a
+				href="/posts/add/"
+				class="float d-flex align-items-center justify-content-center undecorated-link"
+			>
+			</a>
+		</section>
+		<%- include('../partials/footer') %>
+	</body>
+</html>

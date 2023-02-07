@@ -8,4 +8,14 @@ const getPosts = () => {
   });
 };
 
-module.exports = { getPosts };
+const addPost = async (details) => {
+  const existingPost = await Post.findOne({ title: details.title });
+  if (existingPost) {
+    return { code: StatusCodes.CONFLICT, response: existingPost };
+  }
+  const { title } = await Post.create(details);
+  const response = { title };
+  return { code: StatusCodes.CREATED, response };
+};
+
+module.exports = { getPosts, addPost };
