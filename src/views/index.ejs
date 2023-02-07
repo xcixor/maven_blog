@@ -3,29 +3,40 @@
 	<head>
 		<%- include('./partials/styles') %>
 		<link rel="stylesheet" href="/common/css/fab.css" />
+		<link rel="stylesheet" href="/index/css/index.css" />
 		<title> <%=title%> </title>
 	</head>
 
 	<body>
 		<%- include('./partials/nav') %>
 		<section class="content">
-			<div class="container">
+			<div class="container" style="padding-top: 2rem">
 				<div class="row">
 					<div class="col-sm-12">
-						<h2>Welcome <%=user %> </h2>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-12">
-						<h3>List of all blogs</h3>
-						<%if (locals.posts) { %> <% for(let [index,data] of posts.entries()
-						|| []){ %>Error : <%=data%> <%} %> <% } %>
+						<% if (categories.length > 0) {%>
+						<div class="grid">
+							<% for (var i = 0; i < categories.length; i++) { %>
+							<div class="card mb-4 g-col">
+								<div class="card-body">
+									<h5 class="card-title"><%= categories[i].title %></h5>
+									<p class="card-text"><%= categories[i].description %></p>
+									<a href="#" class="btn btn-primary">Edit</a>
+								</div>
+							</div>
+							<%}%>
+						</div>
+						<%} else { %>
+						<div class="card" style="width: 100%">
+							<div class="card-body">
+								<h5 class="card-title">There are no categories added</h5>
+							</div>
+						</div>
+						<% } %>
 					</div>
 				</div>
 			</div>
 			<a
-				href="/posts/"
+				href="/categories/"
 				class="float d-flex align-items-center justify-content-center undecorated-link"
 			>
 				<i class="fa-solid fa-plus fa-2x"></i>

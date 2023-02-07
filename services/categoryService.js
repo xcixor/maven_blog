@@ -1,11 +1,9 @@
 const Category = require('../models/categoryModel');
 const { StatusCodes } = require('../utils/httpStatusCodes');
 
-const getCategories = () => {
-  Category.find({}, (err, category) => {
-    if (err) return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: err };
-    return { code: StatusCodes.OK, response: category };
-  });
+const getCategories = async () => {
+  const categories = await Category.find({});
+  return { code: StatusCodes.SUCCESS, categories };
 };
 
 const addCategory = async (details) => {

@@ -1,0 +1,27 @@
+.grid {
+	display: grid;
+}
+
+/* ipad only */
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+	.grid {
+		grid-template-columns: repeat(2, minmax(200px, 45%));
+		justify-content: space-between;
+	}
+}
+
+/* Air */
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+	.grid {
+		grid-template-columns: repeat(3, minmax(200px, 30%));
+		justify-content: space-between;
+	}
+}
+
+/* Large */
+@media only screen and (min-width: 960px) {
+	.grid {
+		grid-template-columns: repeat(4, minmax(200px, 22%));
+		justify-content: space-between;
+	}
+}
