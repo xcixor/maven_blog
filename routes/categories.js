@@ -4,7 +4,8 @@ const {
   getCreateCategoryPage,
   createCategory,
   updateCategory,
-  getUpdateCategoryPage
+  getUpdateCategoryPage,
+  deleteCategory
 } = require('../controllers/categories');
 const { validateCategory } = require('../middleware/categoryValidation');
 
@@ -16,6 +17,8 @@ router.post('/', checkAuthenticated, validateCategory(), createCategory);
 
 router.get('/:categoryId/', checkAuthenticated, getUpdateCategoryPage);
 
-router.patch('/:categoryId/', validateCategory(), updateCategory);
+router.patch('/:categoryId/', checkAuthenticated, validateCategory(), updateCategory);
+
+router.delete('/:categoryId/', checkAuthenticated, deleteCategory);
 
 module.exports = router;
