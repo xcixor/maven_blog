@@ -15,7 +15,7 @@ const methodOverride = require('method-override');
 const usersRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blog');
-const { checkAuthenticated } = require('./middleware/auth');
+const postRoutes = require('./routes/post');
 
 dotenv.config();
 
@@ -60,6 +60,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
 app.use('/', blogRoutes);
+app.use('/posts', postRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
 
