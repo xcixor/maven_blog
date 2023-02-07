@@ -1,6 +1,6 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
+const { compareSync } = require('bcrypt');
 const passport = require('passport');
 const { ExtractJwt } = require('passport-jwt');
 const { getUserByEmail, getUserById } = require('../utils/userDBUtils');
@@ -29,10 +29,10 @@ const authenticateUser = async (email, password, done) => {
   }
 
   try {
-    if (bcrypt.compare(password, user.password)) {
-      return done(null, user);
+    if (!compareSync(password, user.password)) {
+      return done(null, false, { message: 'Password incorrect.' });
     }
-    return done(null, false, { message: 'Password incorrect.' });
+    return done(null, user);
   } catch (error) {
     return done(error);
   }

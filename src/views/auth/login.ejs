@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<%- include('../partials/styles') %>
+		<title> <%=title%> </title>
+	</head>
 
-<head>
-	<%- include('../partials/styles') %>
-		<title>
-			<%=title%>
-		</title>
-</head>
-
-<body>
-	<%- include('../partials/nav') %>
-		<div class="container">
-			<div class="row">
-				<span>
-					<% if(messages.error) { %>
-						<%= messages.error %>
-							<% } %>
-				</span>
-
-			</div>
-		</div>
+	<body>
+		<%- include('../partials/nav') %>
+		<%- include('../partials/messages') %>
 
 		<section class="content">
 			<div class="container">
@@ -29,17 +17,30 @@
 						<form action="/blog/login/" method="post">
 							<div class="mb-2">
 								<label class="form-label" for="email">Email</label>
-								<input class="form-control" type="email" name="email" id="email" required />
+								<input
+									class="form-control"
+									type="email"
+									name="email"
+									id="email"
+									required
+								/>
 							</div>
 							<div class="mb-2">
 								<label class="form-label" for="password">Password</label>
-								<input class="form-control" type="password" name="password" id="password" required />
+								<input
+									class="form-control"
+									type="password"
+									name="password"
+									id="password"
+									required
+								/>
 							</div>
 							<div class="mb-2">
 								<button type="submit" class="btn btn-primary">Login</button>
 							</div>
 							<div class="mb-2">
-								<p>Don't have an account?
+								<p
+									>Don't have an account?
 									<a href="/api/users/register">Register</a>
 								</p>
 							</div>
@@ -49,6 +50,5 @@
 			</div>
 		</section>
 		<%- include('../partials/footer') %>
-</body>
-
+	</body>
 </html>

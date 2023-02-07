@@ -17,7 +17,8 @@ router.get('/blog/login/', checkNotAuthenticated, (req, res) => {
 router.post('/blog/login', checkNotAuthenticated, passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/blog/login/',
-  failureFlash: true
+  failureFlash: true,
+  successFlash: true
 }));
 
 router.delete('/blog/logout', (req, res, next) => {
