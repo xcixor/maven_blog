@@ -21,14 +21,15 @@ const createCategory = async (req, res) => {
   }
   const { code, response } = await addCategory(req.body);
   if (code === 409) {
-    const errorMessage = [{ msg: `A category with the title ${response.title} already exists!` }];
+    const errorMessage = `A category with the title "${response.title}" already exists!`;
+    req.flash('error', errorMessage);
     res.render(
       'categories/category.ejs',
-      { title: 'Add category', errors: errorMessage }
+      { title: 'Add category' }
     );
     return;
   }
-  req.flash('error', 'Oops something went wrong!');
+  req.flash('success', `${response.title} created successfuly!`);
   res.redirect('/categories/');
 };
 
