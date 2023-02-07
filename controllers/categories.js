@@ -1,4 +1,5 @@
-const { addCategory } = require('../services/categoryService');
+const { addCategory, getCategoryById } = require('../services/categoryService');
+const Category = require('../models/categoryModel');
 
 const getCreateCategoryPage = (req, res) => {
   res.render(
@@ -20,4 +21,35 @@ const createCategory = async (req, res) => {
   res.redirect('/categories/');
 };
 
-module.exports = { getCreateCategoryPage, createCategory };
+const getUpdateCategoryPage = async (req, res) => {
+  const id = req.params.categoryId;
+  const { category } = await getCategoryById(id);
+  res.render(
+    'categories/update.ejs',
+    { title: 'Update Category', category }
+  );
+};
+
+const updateCategory = (req, res) => {
+  const id = req.params.categoryId;
+  const updateObject = req.body;
+  Category.updateOne({ _id: id }, { $set: updateObject })
+    .exec()
+    .then(() => {
+      req.flash('success', `${req.body.title} updated successfuly`);
+      res.redirect('/');
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server error. Please try again. ${err}`
+      });
+    });
+};
+
+module.exports = {
+  getCreateCategoryPage,
+  createCategory,
+  updateCategory,
+  getUpdateCategoryPage
+};

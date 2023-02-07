@@ -12,24 +12,25 @@
 				<div class="row">
 					<div class="col-sm-12 col-md-4 offset-lg-4 col-lg-6 offset-lg-3">
 						<h3>Add Category</h3>
-						<form action="/categories/" method="post">
+						<form action="/categories/<%=category.id%>/?_method=PATCH" method="post">
 							<div class="mb-3">
-								<label for="title" class="form-label"
-									>Title</label
-								>
+								<label for="title" class="form-label">Title</label>
 								<input
 									type="text"
 									class="form-control"
 									id="title"
 									name="title"
+									value="<%=category.title%>"
 								/>
-
 							</div>
 							<div class="mb-3">
-								<label for="description" class="form-label"
-									>Description</label
-								>
-								<textarea class="form-control" placeholder="description" id="description" name="description"></textarea>
+								<label for="description" class="form-label">Description</label>
+								<textarea
+									class="form-control"
+									placeholder="description"
+									id="description"
+									name="description"
+								><%=category.description%></textarea>
 							</div>
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
