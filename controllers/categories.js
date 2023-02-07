@@ -10,6 +10,15 @@ const getCreateCategoryPage = (req, res) => {
 };
 
 const createCategory = async (req, res) => {
+  const errors = expressValidator.validationResult(req);
+  if (!errors.isEmpty()) {
+    req.flash('error', 'Please correct the errors in the form.');
+    res.render(
+      'categories/category.ejs',
+      { title: 'Add Category', errors: errors.array() }
+    );
+    return;
+  }
   const { code, response } = await addCategory(req.body);
   if (code === 409) {
     const errorMessage = [{ msg: `A category with the title ${response.title} already exists!` }];
@@ -19,6 +28,7 @@ const createCategory = async (req, res) => {
     );
     return;
   }
+  req.flash('error', 'Oops something went wrong!');
   res.redirect('/categories/');
 };
 

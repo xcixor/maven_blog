@@ -16,9 +16,13 @@ const addCategory = async (details) => {
   if (existingCategory) {
     return { code: StatusCodes.CONFLICT, response: existingCategory };
   }
-  const { title } = await Category.create(details);
-  const response = { title };
-  return { code: StatusCodes.CREATED, response };
+  try {
+    const { title } = await Category.create(details);
+    const response = { title };
+    return { code: StatusCodes.CREATED, response };
+  } catch (error) {
+    return { code: StatusCodes.INTERNAL_SERVER_ERROR, error };
+  }
 };
 
 module.exports = { getCategories, addCategory, getCategoryById };
