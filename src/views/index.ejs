@@ -9,6 +9,7 @@
 
 	<body>
 		<%- include('./partials/nav') %>
+		<%- include('./partials/messages') %>
 		<section class="content">
 			<div class="container" style="padding-top: 2rem">
 				<div class="row">
@@ -20,7 +21,7 @@
 								<div class="card-body">
 									<h5 class="card-title"><%= categories[i].title %></h5>
 									<p class="card-text"><%= categories[i].description %></p>
-									<a href="#" class="btn btn-primary">Edit</a>
+									<a href="/categories/<%=categories[i].id%>/" class="btn btn-primary">Edit</a>
 								</div>
 							</div>
 							<%}%>
