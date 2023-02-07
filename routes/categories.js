@@ -6,6 +6,7 @@ const {
   updateCategory,
   getUpdateCategoryPage
 } = require('../controllers/categories');
+const { validateCategory } = require('../middleware/categoryValidation');
 
 const router = express.Router();
 
@@ -15,6 +16,6 @@ router.post('/', checkAuthenticated, createCategory);
 
 router.get('/:categoryId/', checkAuthenticated, getUpdateCategoryPage);
 
-router.patch('/:categoryId/', updateCategory);
+router.patch('/:categoryId/', validateCategory(), updateCategory);
 
 module.exports = router;

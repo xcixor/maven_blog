@@ -1,3 +1,4 @@
+const expressValidator = require('express-validator');
 const { addCategory, getCategoryById } = require('../services/categoryService');
 const Category = require('../models/categoryModel');
 
@@ -30,8 +31,18 @@ const getUpdateCategoryPage = async (req, res) => {
   );
 };
 
-const updateCategory = (req, res) => {
+const updateCategory = async (req, res) => {
   const id = req.params.categoryId;
+  const { category } = await getCategoryById(id);
+  const errors = expressValidator.validationResult(req);
+  if (!errors.isEmpty()) {
+    req.flash('error', 'Please correct the errors in the form.');
+    res.render(
+      'categories/update.ejs',
+      { title: 'Update Category', errors: errors.array(), category }
+    );
+    return;
+  }
   const updateObject = req.body;
   Category.updateOne({ _id: id }, { $set: updateObject })
     .exec()

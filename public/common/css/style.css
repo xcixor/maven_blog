@@ -8,3 +8,7 @@ body {
 .undecorated-link {
     text-decoration: none;
 }
+
+.error {
+    color: #d50000;
+}
