@@ -62,10 +62,22 @@ const updateCategory = async (req, res) => {
       res.redirect('/');
     })
     .catch((err) => {
-      res.status(500).json({
-        success: false,
-        message: `Server error. Please try again. ${err}`
-      });
+      req.flash('error', `Server error. Please try again. ${err}`);
+      res.redirect('/categories/');
+    });
+};
+
+const deleteCategory = (req, res) => {
+  const id = req.params.categoryId;
+  Category.findByIdAndRemove(id)
+    .exec()
+    .then(() => {
+      req.flash('success', 'Item deleted successfully.');
+      res.redirect('/');
+    })
+    .catch((err) => {
+      req.flash('error', `Server error. Please try again. ${err}`);
+      res.redirect('/categories/');
     });
 };
 
@@ -73,5 +85,6 @@ module.exports = {
   getCreateCategoryPage,
   createCategory,
   updateCategory,
-  getUpdateCategoryPage
+  getUpdateCategoryPage,
+  deleteCategory
 };
