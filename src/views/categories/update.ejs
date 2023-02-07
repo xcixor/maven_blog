@@ -6,13 +6,17 @@
 	</head>
 
 	<body>
-		<%- include('../partials/nav') %>
+		<%- include('../partials/nav') %> <%- include('../partials/messages') %>
+
 		<section class="content">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12 col-md-4 offset-lg-4 col-lg-6 offset-lg-3">
 						<h3>Add Category</h3>
-						<form action="/categories/<%=category.id%>/?_method=PATCH" method="post">
+						<form
+							action="/categories/<%=category.id%>/?_method=PATCH"
+							method="post"
+						>
 							<div class="mb-3">
 								<label for="title" class="form-label">Title</label>
 								<input
@@ -22,6 +26,13 @@
 									name="title"
 									value="<%=category.title%>"
 								/>
+								<div class="mb-2 error">
+									<%if (locals.errors) { %> <% for(let [index,data] of
+									errors.entries() || []){ %> <% if (data.param === 'title') {
+									%>
+									<p> <%=data.msg%></p>
+									<%} %> <%} %> <% } %>
+								</div>
 							</div>
 							<div class="mb-3">
 								<label for="description" class="form-label">Description</label>
@@ -30,7 +41,15 @@
 									placeholder="description"
 									id="description"
 									name="description"
-								><%=category.description%></textarea>
+								><%=category.description%></textarea
+								>
+								<div class="mb-2 error">
+									<%if (locals.errors) { %> <% for(let [index,data] of
+									errors.entries() || []){ %> <% if (data.param === 'description') {
+									%>
+									<p> <%=data.msg%></p>
+									<%} %> <%} %> <% } %>
+								</div>
 							</div>
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
