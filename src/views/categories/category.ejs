@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/styles') %>
+		<title> <%=title%> </title>
+	</head>
+
+	<body>
+		<%- include('../partials/nav') %>
+		<section class="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 col-md-4 offset-lg-4 col-lg-6 offset-lg-3">
+						<h3>Add Category</h3>
+						<form action="/categories/" method="post">
+							<div class="mb-3">
+								<label for="title" class="form-label"
+									>Title</label
+								>
+								<input
+									type="text"
+									class="form-control"
+									id="title"
+									name="title"
+								/>
+
+							</div>
+							<div class="mb-3">
+								<label for="description" class="form-label"
+									>Description</label
+								>
+								<textarea class="form-control" placeholder="description" id="description" name="description"></textarea>
+							</div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<a
+				href="/categories/"
+				class="float d-flex align-items-center justify-content-center undecorated-link"
+			>
+			</a>
+		</section>
+		<%- include('../partials/footer') %>
+	</body>
+</html>

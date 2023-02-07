@@ -16,6 +16,7 @@ const usersRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blog');
 const postRoutes = require('./routes/post');
+const categoryRoutes = require('./routes/categories');
 
 dotenv.config();
 
@@ -60,6 +61,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
 app.use('/', blogRoutes);
+app.use('/categories', categoryRoutes);
 app.use('/posts', postRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);

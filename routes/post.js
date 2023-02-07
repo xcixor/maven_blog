@@ -4,7 +4,7 @@ const { getCreatePostPage, createPost } = require('../controllers/posts');
 
 const router = express.Router();
 
-router.get('/add/', checkAuthenticated, getCreatePostPage);
+router.get('/', checkAuthenticated, getCreatePostPage);
 
 router.post('/', checkAuthenticated, createPost);
 
