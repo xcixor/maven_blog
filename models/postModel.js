@@ -16,7 +16,7 @@ const PostModel = new Schema({
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   thumbnail: { data: Buffer, contentType: String },
   featured: { type: Boolean, default: false },
-  category: { type: String, enum: ['Coding', 'Life', 'Random', 'Misc'] },
+  category: { type: Schema.Types.ObjectId, ref: 'Category' },
   tags: [String]
 });
 
