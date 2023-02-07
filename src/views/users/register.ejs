@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<%- include('../partials/styles') %>
+		<%- include('../partials/messages') %>
+		<title> <%=title%> </title>
+	</head>
 
-<head>
-	<%- include('../partials/styles') %>
-		<title>
-			<%=title%>
-		</title>
-</head>
-
-<body>
-	<%- include('../partials/nav') %>
+	<body>
+		<%- include('../partials/nav') %>
 		<section class="content">
 			<div class="container">
 				<div class="row">
@@ -17,25 +15,35 @@
 						<h2>Register</h2>
 						<form action="/api/users/register/" method="post">
 							<div class="mb-2">
-								<%if (locals.errors) { %>
-									<% for(let [index,data] of errors.entries() || []){ %>Error :
-										<%=data.msg%>
-											<%} %>
-												<% } %>
+								<%if (locals.errors) { %> <% for(let [index,data] of
+								errors.entries() || []){ %>Error : <%=data.msg%> <%} %> <% } %>
 							</div>
 							<div class="mb-2">
 								<label class="form-label" for="email">Email</label>
-								<input class="form-control" type="email" name="email" id="email" required />
+								<input
+									class="form-control"
+									type="email"
+									name="email"
+									id="email"
+									required
+								/>
 							</div>
 							<div class="mb-2">
 								<label class="form-label" for="password">Password</label>
-								<input class="form-control" type="password" name="password" id="password" required />
+								<input
+									class="form-control"
+									type="password"
+									name="password"
+									id="password"
+									required
+								/>
 							</div>
 							<div class="mb-2">
 								<button class="btn btn-primary" type="submit">Register</button>
 							</div>
 							<div class="mb-2">
-								<p>Already registered?
+								<p
+									>Already registered?
 									<a href="/blog/login/">Login</a>
 								</p>
 							</div>
@@ -45,6 +53,5 @@
 			</div>
 		</section>
 		<%- include('../partials/footer') %>
-</body>
-
+	</body>
 </html>
