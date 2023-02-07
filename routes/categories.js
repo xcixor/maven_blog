@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get('/', checkAuthenticated, getCreateCategoryPage);
 
-router.post('/', checkAuthenticated, createCategory);
+router.post('/', checkAuthenticated, validateCategory(), createCategory);
 
 router.get('/:categoryId/', checkAuthenticated, getUpdateCategoryPage);
 
