@@ -1,11 +1,9 @@
 const Post = require('../models/postModel');
 const { StatusCodes } = require('../utils/httpStatusCodes');
 
-const getPosts = () => {
-  Post.find({}, (err, posts) => {
-    if (err) return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: err };
-    return { code: StatusCodes.OK, response: posts };
-  });
+const getPosts = async () => {
+  const posts = await Post.find({});
+  return { code: StatusCodes.SUCCESS, posts };
 };
 
 const addPost = async (details) => {
@@ -13,9 +11,13 @@ const addPost = async (details) => {
   if (existingPost) {
     return { code: StatusCodes.CONFLICT, response: existingPost };
   }
-  const { title } = await Post.create(details);
-  const response = { title };
-  return { code: StatusCodes.CREATED, response };
+  try {
+    const { title } = await Post.create(details);
+    const response = { title };
+    return { code: StatusCodes.CREATED, response };
+  } catch (error) {
+    return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: error.message };
+  }
 };
 
 module.exports = { getPosts, addPost };

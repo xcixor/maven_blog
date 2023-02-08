@@ -2,8 +2,12 @@ const Category = require('../models/categoryModel');
 const { StatusCodes } = require('../utils/httpStatusCodes');
 
 const getCategories = async () => {
-  const categories = await Category.find({});
-  return { code: StatusCodes.SUCCESS, categories };
+  try {
+    const categories = await Category.find({});
+    return { code: StatusCodes.SUCCESS, categories };
+  } catch (error) {
+    return { code: StatusCodes.INTERNAL_SERVER_ERROR, error };
+  }
 };
 
 const getCategoryById = async (id) => {

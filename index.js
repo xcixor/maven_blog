@@ -36,6 +36,7 @@ const connectionParams = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
+mongoose.set('strictQuery', false);
 mongoose.connect(uri, connectionParams)
   .then(() => {
     console.log(chalk.greenBright('Connected to the database '));
