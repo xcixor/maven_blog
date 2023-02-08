@@ -1,4 +1,5 @@
 const expressValidator = require('express-validator');
+const { convert } = require('html-to-text');
 const { addPost, getPosts } = require('../services/postService');
 const { getCategories } = require('../services/categoryService');
 const { StatusCodes } = require('../utils/httpStatusCodes');
@@ -7,7 +8,7 @@ const getPostsPage = async (req, res) => {
   const { posts } = await getPosts();
   res.render(
     'posts/posts.ejs',
-    { title: 'Add Post', posts }
+    { title: 'Add Post', posts, convert }
   );
 };
 
