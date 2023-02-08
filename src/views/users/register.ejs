@@ -1,53 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<%- include('../partials/styles') %>
-		<%- include('../partials/messages') %>
+		<%- include('../partials/styles') %> <%- include('../partials/messages') %>
 		<title> <%=title%> </title>
 	</head>
 
 	<body>
 		<%- include('../partials/nav') %>
 		<section class="content">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-12 mt-4">
-						<h2>Register</h2>
-						<form action="/api/users/register/" method="post">
-							<div class="mb-2">
-								<%if (locals.errors) { %> <% for(let [index,data] of
-								errors.entries() || []){ %>Error : <%=data.msg%> <%} %> <% } %>
-							</div>
-							<div class="mb-2">
-								<label class="form-label" for="email">Email</label>
-								<input
-									class="form-control"
-									type="email"
-									name="email"
-									id="email"
-									required
-								/>
-							</div>
-							<div class="mb-2">
-								<label class="form-label" for="password">Password</label>
-								<input
-									class="form-control"
-									type="password"
-									name="password"
-									id="password"
-									required
-								/>
-							</div>
-							<div class="mb-2">
-								<button class="btn btn-primary" type="submit">Register</button>
-							</div>
-							<div class="mb-2">
-								<p
-									>Already registered?
-									<a href="/blog/login/">Login</a>
-								</p>
-							</div>
-						</form>
+			<div class="container-fluid bg-primary-subtle h-100">
+				<div class="container h-100">
+					<div class="row h-100">
+						<div class="col-sm-12 col-md-6 offset-md-3 mt-4 d-flex flex-column justify-content-center">
+							<h2 class="text-center">Register</h2>
+							<form action="/api/users/register/" method="post">
+								<div class="mb-2">
+									<%if (locals.errors) { %> <% for(let [index,data] of
+									errors.entries() || []){ %>Error : <%=data.msg%> <%} %> <% }
+									%>
+								</div>
+								<div class="mb-2">
+									<label class="form-label" for="email">Email</label>
+									<input
+										class="form-control"
+										type="email"
+										name="email"
+										id="email"
+										required
+									/>
+								</div>
+								<div class="mb-2">
+									<label class="form-label" for="password">Password</label>
+									<input
+										class="form-control"
+										type="password"
+										name="password"
+										id="password"
+										required
+									/>
+								</div>
+								<div class="mb-2">
+									<button class="btn btn-primary" type="submit"
+										>Register</button
+									>
+								</div>
+								<div class="mb-2">
+									<p
+										>Already registered?
+										<a href="/blog/login/">Login</a>
+									</p>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
