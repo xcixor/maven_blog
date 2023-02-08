@@ -95,10 +95,25 @@ const updatePost = async (req, res) => {
     });
 };
 
+const deletePost = (req, res) => {
+  const id = req.params.postId;
+  Post.findByIdAndRemove(id)
+    .exec()
+    .then(() => {
+      req.flash('success', 'Item deleted successfully.');
+      res.redirect('/posts/');
+    })
+    .catch((err) => {
+      req.flash('error', `Server error. Please try again. ${err}`);
+      res.redirect('/posts/');
+    });
+};
+
 module.exports = {
   getCreatePostPage,
   createPost,
   getPostsPage,
   getUpdatePostPage,
-  updatePost
+  updatePost,
+  deletePost
 };

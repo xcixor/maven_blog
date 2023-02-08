@@ -5,7 +5,8 @@ const {
   createPost,
   getPostsPage,
   getUpdatePostPage,
-  updatePost
+  updatePost,
+  deletePost
 } = require('../controllers/posts');
 const { validatePost } = require('../middleware/postValidation');
 
@@ -20,5 +21,7 @@ router.get('/add/', checkAuthenticated, getCreatePostPage);
 router.get('/:postId/', checkAuthenticated, getUpdatePostPage);
 
 router.patch('/:postId/', checkAuthenticated, validatePost(), updatePost);
+
+router.delete('/:postId/', checkAuthenticated, deletePost);
 
 module.exports = router;
