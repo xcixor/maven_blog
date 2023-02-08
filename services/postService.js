@@ -20,4 +20,13 @@ const addPost = async (details) => {
   }
 };
 
-module.exports = { getPosts, addPost };
+const getPostById = async (id) => {
+  try {
+    const post = await Post.findById(id);
+    return { code: StatusCodes.SUCCESS, post };
+  } catch (error) {
+    return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: error.message };
+  }
+};
+
+module.exports = { getPosts, addPost, getPostById };

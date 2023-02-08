@@ -1,8 +1,9 @@
 const expressValidator = require('express-validator');
 const { convert } = require('html-to-text');
-const { addPost, getPosts } = require('../services/postService');
+const { addPost, getPosts, getPostById } = require('../services/postService');
 const { getCategories } = require('../services/categoryService');
 const { StatusCodes } = require('../utils/httpStatusCodes');
+const Post = require('../models/postModel');
 
 const getPostsPage = async (req, res) => {
   const { posts } = await getPosts();
@@ -53,4 +54,51 @@ const createPost = async (req, res) => {
   res.redirect('/posts/');
 };
 
-module.exports = { getCreatePostPage, createPost, getPostsPage };
+const getUpdatePostPage = async (req, res) => {
+  const id = req.params.postId;
+  const { post } = await getPostById(id);
+  const { categories } = await getCategories();
+  res.render(
+    'posts/update.ejs',
+    { title: 'Update Post', post, categories }
+  );
+};
+
+const updatePost = async (req, res) => {
+  const { categories } = await getCategories();
+  const id = req.params.postId;
+  const { post } = await getPostById(id);
+  const errors = expressValidator.validationResult(req);
+  if (!errors.isEmpty()) {
+    req.flash('error', 'Please correct the errors in the form.');
+    res.render(
+      'posts/update.ejs',
+      {
+        title: 'Update Post',
+        post,
+        categories,
+        errors: errors.array()
+      }
+    );
+    return;
+  }
+  const updateObject = req.body;
+  Post.updateOne({ _id: id }, { $set: updateObject })
+    .exec()
+    .then(() => {
+      req.flash('success', `${req.body.title} updated successfuly`);
+      res.redirect('/posts/');
+    })
+    .catch((err) => {
+      req.flash('error', `Server error. Please try again. ${err}`);
+      res.redirect('/posts/');
+    });
+};
+
+module.exports = {
+  getCreatePostPage,
+  createPost,
+  getPostsPage,
+  getUpdatePostPage,
+  updatePost
+};
