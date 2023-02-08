@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/styles') %>
+
+		<title> <%=title%> </title>
+		<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+	</head>
+
+	<body>
+		<%- include('../partials/nav') %> <%- include('../partials/messages') %>
+
+		<section class="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 col-md-6 offset-md-6 col-lg-8 offset-lg-2">
+						<h3>Add Category</h3>
+						<form action="/posts/<%=post.id%>/?_method=PATCH"" method="post">
+							<div class="mb-2 error">
+								<%if (locals.serverErrors) { %> <% for(let [index,data] of
+								serverErrors.entries() || []){ %> <p> <%=data.msg%></p> <%} %>
+								<% } %>
+							</div>
+							<div class="mb-3">
+								<label for="title" class="form-label">Title</label>
+								<input
+									type="text"
+									class="form-control"
+									id="title"
+									name="title"
+									placeholder="Title"
+									required
+									value="<%=post.title%>"
+								/>
+								<div class="mb-2 error">
+									<%if (locals.errors) { %> <% for(let [index,data] of
+									errors.entries() || []){ %> <% if (data.param === 'title') {
+									%>
+									<p> <%=data.msg%></p>
+									<%} %> <%} %> <% } %>
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="editor" class="form-label">Post</label>
+								<textarea
+									class="form-control editor"
+									placeholder="body"
+									id="body"
+									name="body"
+								>
+                                <%- post.body %>
+
+                                </textarea
+								>
+								<div class="mb-2 error">
+									<%if (locals.errors) { %> <% for(let [index,data] of
+									errors.entries() || []){ %> <% if (data.param === 'body') { %>
+									<p> <%=data.msg%></p>
+									<%} %> <%} %> <% } %>
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="category" class="form-label">Select Category</label>
+								<select
+									class="form-select"
+									aria-label="Category"
+									name="category"
+									required
+								>
+									<% if (categories.length > 0) {%>
+									<div class="grid">
+										<% for (var i = 0; i < categories.length; i++) { %>
+										<option
+                                            value="<%= categories[i]._id %>"
+
+                                            <%= post.category._id.equals(categories[i]._id) ? "selected" : '' %>
+										>
+                                            <%= categories[i].title %>
+										</option>
+										<%}%>
+									</div>
+									<%} %>
+								</select>
+								<div class="mb-2 error">
+									<%if (locals.errors) { %> <% for(let [index,data] of
+									errors.entries() || []){ %> <% if (data.param === 'category')
+									{ %>
+									<p> <%=data.msg%></p>
+									<%} %> <%} %> <% } %>
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="epigraph" class="form-label">Epigraph</label>
+								<textarea
+									class="form-control"
+									placeholder="A short description of the post."
+									id="epigraph"
+									name="epigraph"
+								>
+                                <%- post.epigraph %>
+                                </textarea
+								>
+								<div class="mb-2 error">
+									<%if (locals.errors) { %> <% for(let [index,data] of
+									errors.entries() || []){ %> <% if (data.param === 'epigraph')
+									{ %>
+									<p> <%=data.msg%></p>
+									<%} %> <%} %> <% } %>
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		<%- include('../partials/footer') %>
+		<script>
+			ClassicEditor.create(document.querySelector("#body"))
+				.then((editor) => {
+					console.log(editor);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+			ClassicEditor.create(document.querySelector("#epigraph"))
+				.then((editor) => {
+					console.log(editor);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		</script>
+	</body>
+</html>
