@@ -16,8 +16,9 @@ const PostModel = new Schema({
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   thumbnail: { data: Buffer, contentType: String },
   featured: { type: Boolean, default: false },
-  category: { type: Schema.Types.ObjectId, ref: 'Category' },
-  tags: [String]
+  category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+  tags: [String],
+  status: { type: String, enum: ['Draft', 'Published', 'Archive'], default: 'Draft' }
 });
 
 module.exports = mongoose.model('Post', PostModel);

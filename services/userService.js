@@ -12,4 +12,13 @@ const addUser = async (details) => {
   return { code: StatusCodes.CREATED, response };
 };
 
-module.exports = { addUser };
+const getUsers = async () => {
+  try {
+    const users = await User.find({});
+    return { code: StatusCodes.SUCCESS, users };
+  } catch (error) {
+    return { code: StatusCodes.INTERNAL_SERVER_ERROR, error };
+  }
+};
+
+module.exports = { addUser, getUsers };
