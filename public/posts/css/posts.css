@@ -1,5 +1,11 @@
 .grid {
 	height: auto;
 	align-items: flex-start;
-	grid-template-rows: auto
+	grid-template-rows: auto;
+}
+
+.pngs {
+	filter: invert(31%) sepia(43%) saturate(5273%) hue-rotate(211deg)
+		brightness(97%) contrast(104%);
+	margin-left: 5px;
 }

@@ -108,6 +108,36 @@
 									<%} %> <%} %> <% } %>
 								</div>
 							</div>
+								<div class="mb-3">
+								<label for="status" class="form-label">Select Status</label>
+								<select
+									class="form-select"
+									aria-label="Category"
+									name="status"
+									required
+								>
+									<% if (statuses.length > 0) {%>
+									<div class="grid">
+										<% for (var i = 0; i < statuses.length; i++) { %>
+										<option
+                                            value="<%= statuses[i] %>"
+
+                                            <%= post.status === statuses[i] ? "selected" : '' %>
+										>
+                                            <%= statuses[i] %>
+										</option>
+										<%}%>
+									</div>
+									<%} %>
+								</select>
+								<div class="mb-2 error">
+									<%if (locals.errors) { %> <% for(let [index,data] of
+									errors.entries() || []){ %> <% if (data.param === 'status')
+									{ %>
+									<p> <%=data.msg%></p>
+									<%} %> <%} %> <% } %>
+								</div>
+							</div>
 
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>

@@ -55,17 +55,21 @@ const createPost = async (req, res) => {
 };
 
 const getUpdatePostPage = async (req, res) => {
+  const statuses = ['Published', 'Draft', 'Archive'];
   const id = req.params.postId;
   const { post } = await getPostById(id);
   const { categories } = await getCategories();
   res.render(
     'posts/update.ejs',
-    { title: 'Update Post', post, categories }
+    {
+      title: 'Update Post', post, categories, statuses
+    }
   );
 };
 
 const updatePost = async (req, res) => {
   const { categories } = await getCategories();
+  const statuses = ['Published', 'Draft', 'Archive'];
   const id = req.params.postId;
   const { post } = await getPostById(id);
   const errors = expressValidator.validationResult(req);
@@ -77,7 +81,8 @@ const updatePost = async (req, res) => {
         title: 'Update Post',
         post,
         categories,
-        errors: errors.array()
+        errors: errors.array(),
+        statuses
       }
     );
     return;
