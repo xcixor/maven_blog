@@ -35,6 +35,38 @@
 												><i class="fa-solid fa-trash"></i
 											></button>
 										</form>
+										<div>
+											<% if (posts[i].status === 'Draft') { %>
+											<img
+												class="pngs"
+												src="/common/images/icons/draft.png"
+												alt=""
+												width="40"
+												height="40"
+												title="<%= posts[i].status %>"
+											/>
+											<%} else if (posts[i].status === 'Published'){ %>
+											<img
+												class="pngs"
+												src="/common/images/icons/paper-plane.png"
+												alt=""
+												width="40"
+												height="40"
+												title="<%= posts[i].status %>"
+											/>
+
+											<% } else if (posts[i].status === 'Archive'){ %>
+											<img
+												class="pngs"
+												src="/common/images/icons/archive.png"
+												alt=""
+												width="40"
+												height="40"
+												title="<%= posts[i].status %>"
+											/>
+
+											<% } %>
+										</div>
 									</div>
 								</div>
 							</div>
