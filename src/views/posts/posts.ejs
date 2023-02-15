@@ -22,57 +22,70 @@
 								<div class="card-body">
 									<h5 class="card-title"><%= posts[i].title %></h5>
 									<p class="card-text"> <%- convert(posts[i].epigraph) %> </p>
-									<div class="d-flex">
-										<a href="/posts/<%=posts[i].id%>/" class="btn btn-primary"
-											><i class="fa-solid fa-pen"></i
-										></a>
+									<div class="d-flex justify-content-between">
+										<div class="d-flex">
+											<a href="/posts/<%=posts[i].id%>/" class="d-flex align-items-center undecorated-link" title="Edit Post"
+												><i class="fa-solid fa-pen fa-2xl me-2" style="color: #0d6efd"></i
+											></a>
+											<div class="me-2">
+												<% if (posts[i].status === 'Draft') { %>
+												<img
+													class="pngs"
+													src="/common/images/icons/draft.png"
+													alt=""
+													width="40"
+													height="40"
+													title="<%= posts[i].status %>"
+												/>
+												<%} else if (posts[i].status === 'Published'){ %>
+												<img
+													class="pngs"
+													src="/common/images/icons/paper-plane.png"
+													alt=""
+													width="40"
+													height="40"
+													title="<%= posts[i].status %>"
+												/>
+
+												<% } else if (posts[i].status === 'Archive'){ %>
+												<img
+													class="pngs"
+													src="/common/images/icons/archive.png"
+													alt=""
+													width="40"
+													height="40"
+													title="<%= posts[i].status %>"
+												/>
+												<% } %>
+											</div>
+											<div
+												class="d-flex justify-content-center align-items-center"
+											>
+												<% if (posts[i].featured === true) { %>
+												<i
+													class="fa-solid fa-star fa-2xl"
+													style="color: #0d6efd"
+													title="Featured"
+												></i>
+												<%} else { %>
+												<i
+													class="fa-regular fa-star fa-2xl"
+													style="color: #0d6efd"
+													title="Not Featured"
+												></i>
+												<% } %>
+											</div>
+										</div>
+
 										<form
 											action="/posts/<%=posts[i].id%>/?_method=DELETE"
 											method="post"
 											class="ms-2"
 										>
-											<button type="submit" class="btn btn-primary"
+											<button type="submit" class="btn btn-primary" title="Delete Post"
 												><i class="fa-solid fa-trash"></i
 											></button>
 										</form>
-										<div>
-											<% if (posts[i].status === 'Draft') { %>
-											<img
-												class="pngs"
-												src="/common/images/icons/draft.png"
-												alt=""
-												width="40"
-												height="40"
-												title="<%= posts[i].status %>"
-											/>
-											<%} else if (posts[i].status === 'Published'){ %>
-											<img
-												class="pngs"
-												src="/common/images/icons/paper-plane.png"
-												alt=""
-												width="40"
-												height="40"
-												title="<%= posts[i].status %>"
-											/>
-
-											<% } else if (posts[i].status === 'Archive'){ %>
-											<img
-												class="pngs"
-												src="/common/images/icons/archive.png"
-												alt=""
-												width="40"
-												height="40"
-												title="<%= posts[i].status %>"
-											/>
-											<% } %>
-										</div>
-										<div class="d-flex justify-content-center align-items-center">
-											<% if (posts[i].featured === true) { %>
-											<i class="fa-solid fa-star fa-2xl" style="color:#0d6efd" title="Featured"></i>
-											<%} else { %>
-											<i class="fa-regular fa-star fa-2xl" style="color:#0d6efd" title="Not Featured"></i>
-											<% } %>
-										</div>
 									</div>
 								</div>
 							</div>
