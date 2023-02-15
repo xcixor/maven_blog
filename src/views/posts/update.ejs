@@ -169,7 +169,12 @@
 		</section>
 		<%- include('../partials/footer') %>
 		<script>
-			ClassicEditor.create(document.querySelector("#body"))
+
+			ClassicEditor.create(document.querySelector("#body"), {
+        ckfinder: {
+						uploadUrl: '/ckeditor/upload/'
+					}
+				})
 				.then((editor) => {
 					console.log(editor);
 				})

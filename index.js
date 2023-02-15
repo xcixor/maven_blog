@@ -17,6 +17,7 @@ const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blog');
 const postRoutes = require('./routes/post');
 const categoryRoutes = require('./routes/categories');
+const ckeditorRoutes = require('./routes/ckeditor');
 
 dotenv.config();
 
@@ -66,6 +67,7 @@ app.use('/categories', categoryRoutes);
 app.use('/posts', postRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/ckeditor', ckeditorRoutes);
 
 app.use(express.static('public'));
 app.set('views', './src/views');
