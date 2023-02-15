@@ -139,6 +139,28 @@
 								</div>
 							</div>
 
+								<div class="mb-3">
+									<label for="featured" class="form-label">Featured</label>
+									<input
+										class="form-check-input mt-0"
+										type="checkbox"
+										name="featured"
+										<%= post.featured === true ? "checked" : '' %>
+										>
+										<%= locals.errors %>
+									<div class="mb-2 error">
+										<%if (locals.errors) { %>
+											<% for(let [index,data] of errors.entries() || []){ %>
+												<% if (data.param==='featured' ) { %>
+													<p>
+														<%=data.msg%>
+													</p>
+													<%} %>
+														<%} %>
+															<% } %>
+									</div>
+								</div>
+
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
 					</div>

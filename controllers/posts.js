@@ -87,7 +87,7 @@ const updatePost = async (req, res) => {
     );
     return;
   }
-  const updateObject = req.body;
+  const updateObject = { ...req.body, featured: Boolean(req.body.featured) };
   Post.updateOne({ _id: id }, { $set: updateObject })
     .exec()
     .then(() => {
