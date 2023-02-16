@@ -29,4 +29,24 @@ const getPostById = async (id) => {
   }
 };
 
-module.exports = { getPosts, addPost, getPostById };
+const getPostBySlug = async (slug) => {
+  try {
+    const post = await Post.findOne({ slug });
+    return { code: StatusCodes.SUCCESS, post };
+  } catch (error) {
+    return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: error.message };
+  }
+};
+
+const getPostsInSameCategory = async (category) => {
+  try {
+    const postsInSameCategory = await Post.find({ category });
+    return { code: StatusCodes.SUCCESS, postsInSameCategory };
+  } catch (error) {
+    return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: error.message };
+  }
+};
+
+module.exports = {
+  getPosts, addPost, getPostById, getPostBySlug, getPostsInSameCategory
+};

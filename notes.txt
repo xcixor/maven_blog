@@ -11,4 +11,4 @@ users
 - ensure superusers cannot be created by any type of request
 
 icebox
-## 
+## Hide edit pages from non superusers
