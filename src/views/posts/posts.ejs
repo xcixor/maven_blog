@@ -18,14 +18,24 @@
 						<% if (posts.length > 0) {%>
 						<div class="grid">
 							<% for (var i = 0; i < posts.length; i++) { %>
-							<div class="card mb-4 g-col">
+							<div
+								class="card mb-4 g-col"
+								onclick="location.href='/posts/<%=posts[i].slug%>/';"
+								style="cursor: pointer"
+							>
 								<div class="card-body">
 									<h5 class="card-title"><%= posts[i].title %></h5>
 									<p class="card-text"> <%- convert(posts[i].epigraph) %> </p>
 									<div class="d-flex justify-content-between">
 										<div class="d-flex">
-											<a href="/posts/<%=posts[i].id%>/" class="d-flex align-items-center undecorated-link" title="Edit Post"
-												><i class="fa-solid fa-pen fa-2xl me-2" style="color: #0d6efd"></i
+											<a
+												href="/posts/edit/<%=posts[i].id%>/"
+												class="d-flex align-items-center undecorated-link"
+												title="Edit Post"
+												><i
+													class="fa-solid fa-pen fa-2xl me-2"
+													style="color: #0d6efd"
+												></i
 											></a>
 											<div class="me-2">
 												<% if (posts[i].status === 'Draft') { %>
@@ -82,7 +92,10 @@
 											method="post"
 											class="ms-2"
 										>
-											<button type="submit" class="btn btn-primary" title="Delete Post"
+											<button
+												type="submit"
+												class="btn btn-primary"
+												title="Delete Post"
 												><i class="fa-solid fa-trash"></i
 											></button>
 										</form>

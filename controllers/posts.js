@@ -1,7 +1,12 @@
 const expressValidator = require('express-validator');
 const { convert } = require('html-to-text');
-const { addPost, getPosts, getPostById } = require('../services/postService');
+const moment = require('moment');
+
+const {
+  addPost, getPosts, getPostById, getPostBySlug, getPostsInSameCategory
+} = require('../services/postService');
 const { getCategories } = require('../services/categoryService');
+const { getUserById } = require('../services/userService');
 const { StatusCodes } = require('../utils/httpStatusCodes');
 const Post = require('../models/postModel');
 
@@ -10,6 +15,21 @@ const getPostsPage = async (req, res) => {
   res.render(
     'posts/posts.ejs',
     { title: 'Add Post', posts, convert }
+  );
+};
+
+const getPost = async (req, res) => {
+  const { slug } = req.params;
+  let { post } = await getPostBySlug(slug);
+  const { user } = await getUserById(post.author);
+  let { postsInSameCategory } = await getPostsInSameCategory(post.category);
+  postsInSameCategory = postsInSameCategory.filter((el) => el.id !== post.id);
+  post = { ...post._doc, lastUpdatedDate: moment(post.updated).format('MMM Do YY') };
+  res.render(
+    'posts/viewPost.ejs',
+    {
+      title: post.title, post, author: user, convert, postsInSameCategory
+    }
   );
 };
 
@@ -120,5 +140,6 @@ module.exports = {
   getPostsPage,
   getUpdatePostPage,
   updatePost,
-  deletePost
+  deletePost,
+  getPost
 };

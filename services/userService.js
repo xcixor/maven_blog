@@ -21,4 +21,13 @@ const getUsers = async () => {
   }
 };
 
-module.exports = { addUser, getUsers };
+const getUserById = async (id) => {
+  try {
+    const user = await User.findById(id);
+    return { code: StatusCodes.SUCCESS, user };
+  } catch (error) {
+    return { code: StatusCodes.INTERNAL_SERVER_ERROR, error };
+  }
+};
+
+module.exports = { addUser, getUsers, getUserById };
