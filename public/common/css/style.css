@@ -1,9 +1,46 @@
-html, body {
-    height: 100%;
+:root {
+    --bg-primary: #FDFEFF;
+    --bg-secondary: #D7E9F7;
+    --text-headline: 'Open Sans', sans-serif;
+    --text-normal: 'Lato', sans-serif;
 }
 
 body {
-    /* background-color: whitesmoke; */
+    background-color: var(--bg-primary);
+}
+
+/* margins */
+/* h1, h2, h3, h4, h5, p {
+    margin: 0;
+} */
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* Typography */
+h1 {
+    font-family: var(--text-headline) !important;
+    /* line-height: 2.4rem; */
+}
+
+h2,
+h3 {
+    font-family: var(--text-headline) !important;
+    /* line-height: 1.8rem; */
+}
+
+h4, h5, p, ul, label, a, span, summary {
+    font-family: var(--text-normal) !important;
+}
+
+p, ul {
+    font-size: 1.1rem;
+}
+
+html, body {
+    height: 100%;
 }
 
 .h-100 {
