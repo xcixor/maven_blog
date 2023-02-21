@@ -1,11 +1,11 @@
 const express = require('express');
 const passport = require('passport');
-const { checkNotAuthenticated, checkAuthenticated } = require('../middleware/auth');
+const { checkNotAuthenticated } = require('../middleware/auth');
 const { getCategories } = require('../services/categoryService');
 
 const router = express.Router();
 
-router.get('', checkAuthenticated, async (req, res) => {
+router.get('', async (req, res) => {
   const { categories } = await getCategories();
   res.render('index', { title: 'Blog', categories });
 });
