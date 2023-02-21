@@ -26,6 +26,7 @@
 								<div class="card-body">
 									<h5 class="card-title"><%= posts[i].title %></h5>
 									<p class="card-text"> <%- convert(posts[i].epigraph) %> </p>
+									<% if (locals.isAdmin===true ) { %>
 									<div class="d-flex justify-content-between">
 										<div class="d-flex">
 											<a
@@ -100,6 +101,7 @@
 											></button>
 										</form>
 									</div>
+									<% } %>
 								</div>
 							</div>
 							<%}%>
@@ -114,12 +116,14 @@
 					</div>
 				</div>
 			</div>
+			<% if (locals.isAdmin===true ) { %>
 			<a
 				href="/posts/add/"
 				class="float d-flex align-items-center justify-content-center undecorated-link"
 			>
 				<i class="fa-solid fa-plus fa-2x"></i>
 			</a>
+			<% } %>
 		</section>
 		<%- include('../partials/footer') %>
 	</body>

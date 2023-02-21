@@ -17,9 +17,12 @@
 						<div class="grid">
 							<% for (var i = 0; i < categories.length; i++) { %>
 							<div class="card mb-4 g-col">
-								<div class="card-body d-flex flex-column justify-content-between">
+								<div
+									class="card-body d-flex flex-column justify-content-between"
+								>
 									<h5 class="card-title"><%= categories[i].title %></h5>
 									<p class="card-text"><%= categories[i].description %></p>
+									<% if (locals.isAdmin===true ) { %>
 									<div class="d-flex">
 										<a
 											href="/categories/<%=categories[i].id%>/"
@@ -36,6 +39,8 @@
 											></button>
 										</form>
 									</div>
+
+									<%} %>
 								</div>
 							</div>
 							<%}%>
@@ -50,12 +55,14 @@
 					</div>
 				</div>
 			</div>
+			<% if (locals.isAdmin===true ) { %>
 			<a
 				href="/categories/"
 				class="float d-flex align-items-center justify-content-center undecorated-link"
 			>
 				<i class="fa-solid fa-plus fa-2x"></i>
 			</a>
+			<% } %>
 		</section>
 		<%- include('./partials/footer') %>
 	</body>
