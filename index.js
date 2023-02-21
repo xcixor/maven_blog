@@ -67,6 +67,13 @@ app.use((req, res, next) => {
   // Make `user` and `authenticated` available in templates
   res.locals.user = req.user;
   res.locals.isAuthenticated = req.isAuthenticated();
+  res.locals.isAdmin = false;
+  if (req.isAuthenticated() === true) {
+    console.log(req.user.isSuperUser, '***');
+    res.locals.isAdmin = req.user.isSuperUser;
+  }
+  console.log(res.locals.isAdmin);
+
   next();
 });
 
