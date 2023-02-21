@@ -62,6 +62,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
+
+app.use((req, res, next) => {
+  // Make `user` and `authenticated` available in templates
+  res.locals.user = req.user;
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+});
+
 app.use('/', blogRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/posts', postRoutes);
