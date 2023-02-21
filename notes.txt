@@ -12,3 +12,4 @@ users
 
 icebox
 ## Hide edit pages from non superusers
+containerize
