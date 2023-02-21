@@ -1,6 +1,8 @@
 const express = require('express');
+const passport = require('passport');
 const { checkIsAdmin } = require('../middleware/auth');
 const {
+  getAllPosts,
   getCreatePostPage,
   createPost,
   getPostsPage,
@@ -14,6 +16,8 @@ const { validatePost } = require('../middleware/postValidation');
 const router = express.Router();
 
 router.get('/', getPostsPage);
+
+router.get('/all/', passport.authenticate('jwt', { session: false }), getAllPosts);
 
 router.post('/', checkIsAdmin, validatePost(), createPost);
 
