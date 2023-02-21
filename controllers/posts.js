@@ -10,6 +10,11 @@ const { getUserById } = require('../services/userService');
 const { StatusCodes } = require('../utils/httpStatusCodes');
 const Post = require('../models/postModel');
 
+const getAllPosts = async (req, res) => {
+  const { code, posts } = await getPosts();
+  res.status(code).json(posts);
+};
+
 const getPostsPage = async (req, res) => {
   const { posts } = await getPosts();
   res.render(
@@ -135,6 +140,7 @@ const deletePost = (req, res) => {
 };
 
 module.exports = {
+  getAllPosts,
   getCreatePostPage,
   createPost,
   getPostsPage,

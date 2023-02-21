@@ -2,8 +2,12 @@ const Post = require('../models/postModel');
 const { StatusCodes } = require('../utils/httpStatusCodes');
 
 const getPosts = async () => {
-  const posts = await Post.find({});
-  return { code: StatusCodes.SUCCESS, posts };
+  try {
+    const posts = await Post.find({});
+    return { code: StatusCodes.SUCCESS, posts };
+  } catch (error) {
+    return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: error.message };
+  }
 };
 
 const addPost = async (details) => {
