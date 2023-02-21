@@ -39,22 +39,22 @@ const createUser = async (req, res) => {
 const getUsers = (req, res) => {
   User.find((err, dbUsers) => {
     if (err) {
-      return res.send(err);
+      return res.status(500).send(err);
     }
-    return res.send(dbUsers);
+    return res.status(200).send(dbUsers);
   });
 };
 
 const getUser = (req, res) => {
   const { id } = req.params;
   const foundUser = users.find((user) => user.id === id);
-  res.send(foundUser);
+  res.status(200).send(foundUser);
 };
 
 const deleteUser = (req, res) => {
   const { id } = req.params;
   users = users.filter((user) => user.id !== id);
-  res.send(`User ${id} deleted.`);
+  res.status(200).send(`User ${id} deleted.`);
 };
 
 const updateUser = (req, res) => {
@@ -62,7 +62,7 @@ const updateUser = (req, res) => {
   const { id } = req.params;
   const foundUser = users.find((user) => user.id === id);
   // implement logic for update
-  res.send(`User ${foundUser.id} updated.`);
+  res.status(200).send(`User ${foundUser.id} updated.`);
 };
 
 module.exports = {
