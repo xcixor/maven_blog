@@ -1,6 +1,7 @@
 const expressValidator = require('express-validator');
 const { convert } = require('html-to-text');
 const moment = require('moment');
+const readingTime = require('reading-time');
 
 const {
   addPost, getPosts, getPostById, getPostBySlug, getPostsInSameCategory
@@ -11,8 +12,10 @@ const { StatusCodes } = require('../utils/httpStatusCodes');
 const Post = require('../models/postModel');
 
 const getAllPosts = async (req, res) => {
+
   const { code, posts } = await getPosts();
-  res.status(code).json(posts);
+  const updatedPosts = posts.map(post => ({ ...post._doc, read_time: readingTime(post.body).text, updated: moment(post.updated).format('MMM Do, YY') }));
+  res.status(code).json(updatedPosts);
 };
 
 const getPostsPage = async (req, res) => {
