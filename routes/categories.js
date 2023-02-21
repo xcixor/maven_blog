@@ -1,5 +1,5 @@
 const express = require('express');
-const { checkAuthenticated } = require('../middleware/auth');
+const { checkIsAdmin } = require('../middleware/auth');
 const {
   getCreateCategoryPage,
   createCategory,
@@ -11,14 +11,14 @@ const { validateCategory } = require('../middleware/categoryValidation');
 
 const router = express.Router();
 
-router.get('/', checkAuthenticated, getCreateCategoryPage);
+router.get('/', checkIsAdmin, getCreateCategoryPage);
 
-router.post('/', checkAuthenticated, validateCategory(), createCategory);
+router.post('/', checkIsAdmin, validateCategory(), createCategory);
 
-router.get('/:categoryId/', checkAuthenticated, getUpdateCategoryPage);
+router.get('/:categoryId/', checkIsAdmin, getUpdateCategoryPage);
 
-router.patch('/:categoryId/', checkAuthenticated, validateCategory(), updateCategory);
+router.patch('/:categoryId/', checkIsAdmin, validateCategory(), updateCategory);
 
-router.delete('/:categoryId/', checkAuthenticated, deleteCategory);
+router.delete('/:categoryId/', checkIsAdmin, deleteCategory);
 
 module.exports = router;
