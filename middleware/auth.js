@@ -12,4 +12,11 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
-module.exports = { checkAuthenticated, checkNotAuthenticated };
+function checkIsAdmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.isSuperUser) {
+    return next();
+  }
+  res.redirect('/blog/login/');
+}
+
+module.exports = { checkAuthenticated, checkNotAuthenticated, checkIsAdmin };

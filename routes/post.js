@@ -1,5 +1,5 @@
 const express = require('express');
-const { checkAuthenticated } = require('../middleware/auth');
+const { checkIsAdmin } = require('../middleware/auth');
 const {
   getCreatePostPage,
   createPost,
@@ -15,15 +15,15 @@ const router = express.Router();
 
 router.get('/', getPostsPage);
 
-router.post('/', checkAuthenticated, validatePost(), createPost);
+router.post('/', checkIsAdmin, validatePost(), createPost);
 
-router.get('/add/', checkAuthenticated, getCreatePostPage);
+router.get('/add/', checkIsAdmin, getCreatePostPage);
 
-router.get('/edit/:postId/', checkAuthenticated, getUpdatePostPage);
+router.get('/edit/:postId/', checkIsAdmin, getUpdatePostPage);
 
-router.patch('/:postId/', checkAuthenticated, validatePost(), updatePost);
+router.patch('/:postId/', checkIsAdmin, validatePost(), updatePost);
 
-router.delete('/:postId/', checkAuthenticated, deletePost);
+router.delete('/:postId/', checkIsAdmin, deletePost);
 
 router.get('/:slug/', getPost);
 
