@@ -13,7 +13,7 @@ const { validatePost } = require('../middleware/postValidation');
 
 const router = express.Router();
 
-router.get('/', checkAuthenticated, getPostsPage);
+router.get('/', getPostsPage);
 
 router.post('/', checkAuthenticated, validatePost(), createPost);
 
