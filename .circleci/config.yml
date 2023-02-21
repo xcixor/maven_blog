@@ -46,7 +46,7 @@ jobs:
           image: "gcr.io/${GOOGLE_PROJECT_ID}/maven_blog:${CIRCLE_SHA1}"
           platform: managed
           region: us-east1
-          service-name: maven_blog-<< parameters.environment >>
+          service-name: maven-blog-<< parameters.environment >>
           unauthenticated: true
           args: --service-account=<< parameters.service-account-name >>
 
